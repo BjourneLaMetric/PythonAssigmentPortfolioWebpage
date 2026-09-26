@@ -1,0 +1,363 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --background: #08080d;
+    --surface: #101017;
+    --surface-light: #161620;
+    --text: #f5f5f7;
+    --muted: #92929e;
+    --pink: #ff168c;
+    --blue: #168cff;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    top: -250px;
+    left: -200px;
+    background: var(--pink);
+    opacity: 0.08;
+    filter: blur(140px);
+    pointer-events: none;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    right: -250px;
+    bottom: -250px;
+    background: var(--blue);
+    opacity: 0.08;
+    filter: blur(140px);
+    pointer-events: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.navbar {
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.logo span {
+    color: var(--pink);
+}
+
+nav {
+    display: flex;
+    gap: 32px;
+}
+
+nav a {
+    color: var(--muted);
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--text);
+}
+
+.hero {
+    width: min(1200px, calc(100% - 48px));
+    min-height: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 780px;
+    position: relative;
+    z-index: 2;
+}
+
+.eyebrow,
+.section-label {
+    color: var(--blue);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.hero h1 {
+    margin-top: 20px;
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.07em;
+    font-weight: 800;
+}
+
+.hero h1 span,
+.contact h2 span {
+    color: var(--pink);
+    text-shadow: 0 0 35px rgba(255, 22, 140, 0.35);
+}
+
+.hero-text {
+    max-width: 570px;
+    margin-top: 32px;
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 38px;
+}
+
+.button {
+    padding: 13px 22px;
+    border: 1px solid var(--border);
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.primary {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #fff;
+    box-shadow: 0 0 30px rgba(255, 22, 140, 0.2);
+}
+
+.primary:hover {
+    box-shadow: 0 0 40px rgba(255, 22, 140, 0.45);
+    transform: translateY(-2px);
+}
+
+.secondary {
+    color: var(--muted);
+}
+
+.secondary:hover {
+    border-color: var(--blue);
+    color: var(--text);
+}
+
+.hero-orbit {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    right: 5%;
+    border: 1px solid rgba(22, 140, 255, 0.25);
+    border-radius: 50%;
+    box-shadow:
+        0 0 80px rgba(22, 140, 255, 0.08),
+        inset 0 0 80px rgba(255, 22, 140, 0.05);
+}
+
+.hero-orbit::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 35px;
+    right: 65px;
+    background: var(--pink);
+    border-radius: 50%;
+    box-shadow: 0 0 25px var(--pink);
+}
+
+.section {
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 140px 0;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 60px;
+    border-top: 1px solid var(--border);
+}
+
+.section-content {
+    max-width: 700px;
+}
+
+.section h2 {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    margin-bottom: 28px;
+}
+
+.section-content p {
+    color: var(--muted);
+    max-width: 600px;
+    font-size: 1.1rem;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.project-card {
+    min-height: 300px;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.project-card:hover {
+    border-color: rgba(255, 22, 140, 0.5);
+    transform: translateY(-5px);
+}
+
+.project-number {
+    color: var(--blue);
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.project-card h3 {
+    margin-top: auto;
+    font-size: 1.4rem;
+}
+
+.project-card p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.project-card a {
+    margin-top: 25px;
+    color: var(--pink);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.contact-content {
+    position: relative;
+}
+
+.contact h2 {
+    margin-bottom: 45px;
+}
+
+.contact-link {
+    color: var(--blue);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--blue);
+    padding-bottom: 6px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-link:hover {
+    color: var(--pink);
+    border-color: var(--pink);
+}
+
+footer {
+    width: min(1200px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.7rem;
+}
+
+@media (max-width: 800px) {
+    .navbar {
+        width: min(100% - 32px, 1200px);
+    }
+
+    nav {
+        gap: 16px;
+    }
+
+    .hero {
+        width: min(100% - 32px, 1200px);
+        min-height: 650px;
+    }
+
+    .hero-orbit {
+        width: 280px;
+        height: 280px;
+        right: -80px;
+        opacity: 0.5;
+    }
+
+    .section {
+        width: min(100% - 32px, 1200px);
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 90px 0;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        width: min(100% - 32px, 1200px);
+    }
+}
+
+@media (max-width: 500px) {
+    nav a {
+        font-size: 0.7rem;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
