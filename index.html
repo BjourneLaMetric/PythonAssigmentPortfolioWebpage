@@ -1,121 +1,459 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Wesbite</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="navbar">
-      <a href="#" class="logo">Future:5500<span>.</span></a>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Rivera | Portfolio</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+              
+    </script>
 
-      <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-      </nav>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .active-nav {
+            color: #0284c7;
+            font-weight: 600;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col relative selection:bg-sky-500 selection:text-white overflow-x-hidden">
+
+    <!-- Ambient background glow accents -->
+    <div class="ambient-glow bg-sky-500 w-96 h-96 top-10 left-1/4"></div>
+    <div class="ambient-glow bg-indigo-500 w-80 h-80 top-96 right-10"></div>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav bg-white/70 dark:bg-slate-950/70 border-b border-slate-200/80 dark:border-slate-800/80">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="#home" class="text-xl font-bold font-mono tracking-tight text-slate-900 dark:text-white hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+                    &lt;Alex<span class="text-sky-600 dark:text-sky-400">/</span>&gt;
+                </a>
+
+                <!-- Desktop Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a href="#home" class="nav-link hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Home</a>
+                    <a href="#about" class="nav-link hover:text-sky-600 dark:hover:text-sky-400 transition-colors">About</a>
+                    <a href="#projects" class="nav-link hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Projects</a>
+                    <a href="#contact" class="nav-link hover:text-sky-600 dark:hover:text-sky-400 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Actions (Theme Toggle & Mobile Menu Button) -->
+                <div class="flex items-center space-x-3">
+                    <!-- Theme Toggle Button -->
+                    <button id="theme-toggle" aria-label="Toggle Theme" class="p-2.5 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none">
+                        <i id="theme-icon" class="fas fa-moon text-lg"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" aria-label="Toggle Mobile Navigation" class="md:hidden p-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none">
+                        <i id="menu-icon" class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-lg">
+            <div class="px-4 pt-2 pb-4 space-y-2 text-base font-medium text-slate-700 dark:text-slate-200">
+                <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Home</a>
+                <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+                <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+                <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
+            </div>
+        </div>
     </header>
 
-    <main>
-      <section class="hero">
-        <div class="hero-content">
-          <p class="eyebrow">Algorithms · Resolutions · Creative Forwards</p>
-          <h1>Building things<br /><span>worth noticing.</span></h1>
-          <p class="hero-text">
-            A developer interested in software, artificial intelligence,
-            robotics, and ideas that sit at the intersection of technology and
-            creativity.
-          </p>
+    <main class="flex-grow pt-16">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-[88vh] flex items-center justify-center relative px-4 sm:px-6 lg:px-8 py-20">
+            <div class="max-w-4xl mx-auto text-center space-y-8 z-10">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-sky-100 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/80">
+                    <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+                    <span>Open to new opportunities</span>
+                </div>
 
-          <div class="hero-actions">
-            <a href="#projects" class="button primary">View Projects</a>
-            <a href="#contact" class="button secondary">Get in Touch</a>
-          </div>
-        </div>
+                <!-- Main Headline -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                    Hi, I'm <span class="bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-500 bg-clip-text text-transparent">Alex Rivera</span>
+                </h1>
 
-        <div class="hero-orbit"></div>
-      </section>
+                <!-- Subtitle Statement -->
+                <p class="text-lg sm:text-xl md:text-2xl font-normal text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                    A full-stack software developer passionate about building clean, performant, and user-centric web applications.
+                </p>
 
-      <section id="about" class="section about">
-        <div class="section-label">01 / ABOUT</div>
-        <div class="business-card">
-          <div class="card-image">
-            <div class="image-placeholder">
-              <span>YOUR<br />PHOTO</span>
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <a href="#projects" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-medium shadow-lg shadow-sky-500/25 transition-all transform hover:-translate-y-0.5 text-center">
+                        View Projects <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium transition-all text-center">
+                        Contact Me
+                    </a>
+                </div>
+
+                <!-- Quick Social Links -->
+                <div class="flex items-center justify-center space-x-6 pt-6 text-slate-500 dark:text-slate-400">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hover:text-sky-600 dark:hover:text-sky-400 text-xl transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-sky-600 dark:hover:text-sky-400 text-xl transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="hover:text-sky-600 dark:hover:text-sky-400 text-xl transition-colors">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="mailto:alex.rivera@example.com" aria-label="Email" class="hover:text-sky-600 dark:hover:text-sky-400 text-xl transition-colors">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
             </div>
-          </div>
-          <div class="card-info">
-            <div class="card-top">
-              <span class="card-status">AVAILABLE FOR PROJECTS</span>
-              <span class="card-id">NM / 01</span>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-200/60 dark:border-slate-800/60 bg-slate-100/50 dark:bg-slate-900/40">
+            <div class="max-w-5xl mx-auto space-y-12">
+                <!-- Section Header -->
+                <div class="text-center space-y-3">
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">About Me</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-base max-w-xl mx-auto">A little bit about my journey, experience, and favorite technologies.</p>
+                </div>
+
+                <!-- Grid Layout: Profile Picture & Bio -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    <!-- Profile Picture Avatar Frame -->
+                    <div class="md:col-span-5 flex justify-center">
+                        <div class="relative group">
+                            <!-- Background gradient ring glow -->
+                            <div class="absolute -inset-1.5 bg-gradient-to-r from-sky-500 to-indigo-500 rounded-3xl opacity-75 blur transition duration-300 group-hover:opacity-100"></div>
+                            
+                            <!-- Profile image container -->
+                            <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl overflow-hidden bg-slate-200 dark:bg-slate-800 border-2 border-white dark:border-slate-900 shadow-xl">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" 
+                                    alt="Alex Rivera Profile Picture" 
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x600/0284c7/white?text=Alex+Rivera';"
+                                />
+                            </div>
+
+                            <!-- Decorative Badge -->
+                            <div class="absolute -bottom-3 -right-3 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 px-3.5 py-1.5 rounded-xl text-xs font-semibold shadow-lg border border-slate-200 dark:border-slate-700 flex items-center space-x-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                <span>Based in SF, CA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bio Text & Meta -->
+                    <div class="md:col-span-7 space-y-5 text-slate-600 dark:text-slate-300 leading-relaxed text-base">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+                            Building digital products with code and creativity.
+                        </h3>
+                        <p>
+                            I hold a degree in Computer Science and have spent the last few years developing modern web applications. My journey started with building simple static websites, which grew into a full-fledged passion for full-stack architecture, clean API design, and intuitive user experiences.
+                        </p>
+                        <p>
+                            I prioritize writing code that is clean, accessible, and scalable. I love turning complex ideas into functional, beautifully designed web software.
+                        </p>
+
+                        <!-- Quick Info Highlights -->
+                        <div class="pt-2 grid grid-cols-2 gap-4 text-sm">
+                            <div class="p-3.5 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80">
+                                <div class="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Education</div>
+                                <div class="font-semibold text-slate-800 dark:text-slate-100">B.S. Computer Science</div>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80">
+                                <div class="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Experience</div>
+                                <div class="font-semibold text-slate-800 dark:text-slate-100">3+ Years Building</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Skills Card Section -->
+                <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center space-x-2.5">
+                        <i class="fas fa-layer-group text-sky-600 dark:text-sky-400"></i>
+                        <span>Skills & Technology Stack</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Frontend Skills -->
+                        <div class="space-y-3">
+                            <h4 class="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider">Frontend</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">JavaScript (ES6+)</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">TypeScript</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">React / Next.js</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">Tailwind CSS</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">HTML5 & CSS3</span>
+                            </div>
+                        </div>
+
+                        <!-- Backend Skills -->
+                        <div class="space-y-3">
+                            <h4 class="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider">Backend & Databases</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">Node.js</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">Express</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">Python</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">PostgreSQL</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">MongoDB</span>
+                            </div>
+                        </div>
+
+                        <!-- Tools & Workflow -->
+                        <div class="space-y-3">
+                            <h4 class="text-xs font-semibold text-slate-400 dark:text-slate-400 uppercase tracking-wider">Tools & Architecture</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">Git & GitHub</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">Docker</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">REST APIs</span>
+                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg border border-slate-200/60 dark:border-slate-700/60">Vercel / AWS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="card-main">
-              <p class="card-role">COMPUTER SCIENCE · AI</p>
-              <h2>Noman<br /><span>Baig.</span></h2>
-              <p class="card-bio">
-                I enjoy solving difficult problems, understanding how systems
-                work, and turning abstract ideas into functional software.
-              </p>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto space-y-12">
+                <!-- Section Header -->
+                <div class="text-center space-y-3">
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Featured Projects</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-base max-w-xl mx-auto">Explore some of my recent web applications and software projects.</p>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Project Card 1 -->
+                    <div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-950/80 text-sky-600 dark:text-sky-400 flex items-center justify-center font-mono font-bold text-lg">
+                                    01
+                                </div>
+                                <div class="flex items-center space-x-3 text-slate-500 dark:text-slate-400">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Project Source Code" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" aria-label="Project Live Demo" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                                DevFlow Dashboard
+                            </h3>
+
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                A clean productivity dashboard for developers featuring task management, custom code snippet libraries, and GitHub API activity feeds.
+                            </p>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <div class="flex flex-wrap gap-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">React</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Node.js</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 -->
+                    <div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-mono font-bold text-lg">
+                                    02
+                                </div>
+                                <div class="flex items-center space-x-3 text-slate-500 dark:text-slate-400">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Project Source Code" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" aria-label="Project Live Demo" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                                Pulse Analytics Engine
+                            </h3>
+
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Lightweight, privacy-focused analytics service providing real-time visitor insights, custom web events, and interactive charts.
+                            </p>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <div class="flex flex-wrap gap-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Next.js</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">TypeScript</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">FastAPI</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Redis</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3 -->
+                    <div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-mono font-bold text-lg">
+                                    03
+                                </div>
+                                <div class="flex items-center space-x-3 text-slate-500 dark:text-slate-400">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Project Source Code" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" aria-label="Project Live Demo" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                                CodeSnap Snippet Studio
+                            </h3>
+
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                Cross-platform application for creating, customizing, syntax-highlighting, and exporting high-resolution code images.
+                            </p>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <div class="flex flex-wrap gap-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Electron</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">React</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 4 -->
+                    <div class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl dark:hover:border-slate-700 transition-all duration-300 flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950/80 text-purple-600 dark:text-purple-400 flex items-center justify-center font-mono font-bold text-lg">
+                                    04
+                                </div>
+                                <div class="flex items-center space-x-3 text-slate-500 dark:text-slate-400">
+                                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Project Source Code" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" aria-label="Project Live Demo" class="hover:text-sky-600 dark:hover:text-sky-400 text-lg transition-colors p-1">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                                TaskCraft Smart Organizer
+                            </h3>
+
+                            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                AI-assisted workflow tool that automatically categorizes user tasks, estimates timelines, and generates weekly summaries.
+                            </p>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <div class="flex flex-wrap gap-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Python</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">OpenAI API</span>
+                                <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="card-bottom">
-              <div>
-                <span class="detail-label">FOCUS</span>
-                <span class="detail-value">AI / Robotics / Software</span>
-              </div>
-              <div>
-                <span class="detail-label">LOCATION</span>
-                <span class="detail-value">India</span>
-              </div>
-              <div class="card-mark">N.</div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="projects" class="section projects">
-        <div class="section-label">02 / PROJECTS</div>
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-200/60 dark:border-slate-800/60 bg-slate-100/50 dark:bg-slate-900/40">
+            <div class="max-w-3xl mx-auto text-center space-y-8">
+                <div class="space-y-3">
+                    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Get In Touch</h2>
+                    <p class="text-slate-600 dark:text-slate-400 text-base max-w-lg mx-auto">
+                        Whether you have a question, a project opportunity, or just want to say hi, feel free to reach out!
+                    </p>
+                </div>
 
-        <div class="project-grid">
-          <article class="project-card">
-            <span class="project-number">01</span>
-            <h3>Project One</h3>
-            <p>A short description of the project and the problem it solves.</p>
-            <a href="#">View Project ↗</a>
-          </article>
+                <!-- Contact Card -->
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                    <div class="text-xs font-medium text-slate-400 dark:text-slate-400 uppercase tracking-wider font-mono">
+                        Direct Email
+                    </div>
 
-          <article class="project-card">
-            <span class="project-number">02</span>
-            <h3>Project Two</h3>
-            <p>
-              A short description of the project and the technology behind it.
-            </p>
-            <a href="#">View Project ↗</a>
-          </article>
-
-          <article class="project-card">
-            <span class="project-number">03</span>
-            <h3>Project Three</h3>
-            <p>
-              A short description of another experiment, application, or idea.
-            </p>
-            <a href="#">View Project ↗</a>
-          </article>
-        </div>
-      </section>
-
-      <section id="contact" class="section contact">
-        <div class="section-label">03 / CONTACT</div>
-        <div class="contact-content">
-          <h2>Let's Carve<br /><span> A New World.</span></h2>
-          <a href="mailto:mirza.baig.btech2026@sitpune.edu.in" class="contact-link">
-            mirza.baig.btech2026@sitpune.edu.in ↗
-          </a>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <span>©2026 MN</span>
-    </footer>
-  </body>
-</html>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <span id="email-text" class="text-lg sm:text-xl font-semibold font-mono text-slate-900 dark:text-slate-100">
+                            alex.rivera@example.com
+                        </span>
+                        
+                        <button id="copy-email-btn" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors focus:outline-none">
+                            <i id="copy-icon" class="far fa-copy"></i>
+                            <span id="copy-status">Copy Email</span>
+                        </button>
+                    </div>
